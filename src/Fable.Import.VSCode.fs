@@ -5,7 +5,7 @@ open Fable.Import.JS
 open Fable.Import.Node
 
 module vscode =
-    type [<Import("Disposable","vscode")>] Disposable(callOnDispose: Function) =
+    type [<Import("Disposable","@types/vscode")>] Disposable(callOnDispose: Function) =
         static member from([<ParamArray>] disposableLikes: obj[]): Disposable = failwith "JS only"
         member __.dispose(): obj = failwith "JS only"
 
@@ -13,7 +13,7 @@ module vscode =
         [<Emit("$0($1...)")>] abstract Invoke: listener: Func<'T, obj> * ?thisArgs: obj * ?disposables: ResizeArray<Disposable> -> Disposable
 
 
-    and [<Import("EventEmitter", "vscode")>] EventEmitter<'T>() =
+    and [<Import("EventEmitter", "@types/vscode")>] EventEmitter<'T>() =
         member __.addListener(``event``: string, listener: Function): Events.EventEmitter = failwith "JS only"
         member __.on(``event``: string, listener: Function): Events.EventEmitter = failwith "JS only"
         member __.once(``event``: string, listener: Function): Events.EventEmitter = failwith "JS only"
@@ -58,7 +58,7 @@ module vscode =
         abstract validateRange: range: Range -> Range
         abstract validatePosition: position: Position -> Position
 
-    and [<Import("Position","vscode")>] Position(line: float, character: float) =
+    and [<Import("Position","@types/vscode")>] Position(line: float, character: float) =
         member __.line with get(): float = failwith "JS only" and set(v: float): unit = failwith "JS only"
         member __.character with get(): float = failwith "JS only" and set(v: float): unit = failwith "JS only"
         member __.isBefore(other: Position): bool = failwith "JS only"
@@ -70,7 +70,7 @@ module vscode =
         member __.translate(?lineDelta: float, ?characterDelta: float): Position = failwith "JS only"
         member __.``with``(?line: float, ?character: float): Position = failwith "JS only"
 
-    and [<Import("Range","vscode")>] Range(startLine: float, startCharacter: float, endLine: float, endCharacter: float) =
+    and [<Import("Range","@types/vscode")>] Range(startLine: float, startCharacter: float, endLine: float, endCharacter: float) =
         member __.start with get(): Position = failwith "JS only" and set(v: Position): unit = failwith "JS only"
         member __.``end`` with get(): Position = failwith "JS only" and set(v: Position): unit = failwith "JS only"
         member __.isEmpty with get(): bool = failwith "JS only" and set(v: bool): unit = failwith "JS only"
@@ -81,7 +81,7 @@ module vscode =
         member __.union(other: Range): Range = failwith "JS only"
         member __.``with``(?start: Position, ?``end``: Position): Range = failwith "JS only"
 
-    and [<Import("Selection","vscode")>] Selection(anchorLine: float, anchorCharacter: float, activeLine: float, activeCharacter: float) =
+    and [<Import("Selection","@types/vscode")>] Selection(anchorLine: float, anchorCharacter: float, activeLine: float, activeCharacter: float) =
         inherit Range(anchorLine, anchorCharacter, activeLine, activeCharacter)
         member __.anchor with get(): Position = failwith "JS only" and set(v: Position): unit = failwith "JS only"
         member __.active with get(): Position = failwith "JS only" and set(v: Position): unit = failwith "JS only"
@@ -135,7 +135,7 @@ module vscode =
         /// The decoration's range will widen when edits occur at the end, but not at the start.
         | ClosedOpen = 3
 
-    and [<Import("ThemeColor","vscode")>] ThemeColor(id: string) =
+    and [<Import("ThemeColor","@types/vscode")>] ThemeColor(id: string) =
         class end
 
     and ThemableDecorationRenderOptions =
@@ -217,7 +217,7 @@ module vscode =
         abstract insert: location: Position * value: string -> unit
         abstract delete: location: U2<Range, Selection> -> unit
 
-    and [<Import("Uri","vscode")>] Uri() =
+    and [<Import("Uri","@types/vscode")>] Uri() =
         member __.scheme with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.authority with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.path with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
@@ -233,7 +233,7 @@ module vscode =
         abstract isCancellationRequested: bool with get, set
         abstract onCancellationRequested: Event<obj> with get, set
 
-    and [<Import("CancellationTokenSource","vscode")>] CancellationTokenSource() =
+    and [<Import("CancellationTokenSource","@types/vscode")>] CancellationTokenSource() =
         member __.token with get(): CancellationToken = failwith "JS only" and set(v: CancellationToken): unit = failwith "JS only"
         member __.cancel(): unit = failwith "JS only"
         member __.dispose(): unit = failwith "JS only"
@@ -280,7 +280,7 @@ module vscode =
     and CodeActionProvider =
         abstract provideCodeActions: document: TextDocument * range: Range * context: CodeActionContext * token: CancellationToken -> U2<ResizeArray<Command>, Promise<ResizeArray<Command>>>
 
-    and [<Import("CodeLens","vscode")>] CodeLens(range: Range, ?command: Command) =
+    and [<Import("CodeLens","@types/vscode")>] CodeLens(range: Range, ?command: Command) =
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
         member __.command with get(): Command = failwith "JS only" and set(v: Command): unit = failwith "JS only"
         member __.isResolved with get(): bool = failwith "JS only" and set(v: bool): unit = failwith "JS only"
@@ -302,7 +302,7 @@ module vscode =
     and TypeDefinitionProvider =
         abstract provideTypeDefinition: document: TextDocument * position: Position * token: CancellationToken -> U2<Definition, Promise<Definition>>
 
-    and [<Import("MarkdownString","vscode")>] MarkdownString(?value: string) =
+    and [<Import("MarkdownString","@types/vscode")>] MarkdownString(?value: string) =
         member __.value with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.isTrusted with get(): bool = failwith "JS only" and set(v: bool): unit = failwith "JS only"
         member __.appendText(value: string): MarkdownString = failwith "JS only"
@@ -311,7 +311,7 @@ module vscode =
     and MarkedString =
         U3<MarkdownString, string, obj>
 
-    and [<Import("Hover","vscode")>] Hover(contents: U2<MarkedString, ResizeArray<MarkedString>>, ?range: Range) =
+    and [<Import("Hover","@types/vscode")>] Hover(contents: U2<MarkedString, ResizeArray<MarkedString>>, ?range: Range) =
         member __.contents with get(): ResizeArray<MarkedString> = failwith "JS only" and set(v: ResizeArray<MarkedString>): unit = failwith "JS only"
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
 
@@ -323,7 +323,7 @@ module vscode =
         | Read = 1
         | Write = 2
 
-    and [<Import("DocumentHighlight","vscode")>] DocumentHighlight(range: Range, ?kind: DocumentHighlightKind) =
+    and [<Import("DocumentHighlight","@types/vscode")>] DocumentHighlight(range: Range, ?kind: DocumentHighlightKind) =
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
         member __.kind with get(): DocumentHighlightKind = failwith "JS only" and set(v: DocumentHighlightKind): unit = failwith "JS only"
 
@@ -350,13 +350,13 @@ module vscode =
         | Boolean = 16
         | Array = 17
 
-    and [<Import("SymbolInformation","vscode")>] SymbolInformation(name: string, kind: SymbolKind, range: Range, ?uri: Uri, ?containerName: string) =
+    and [<Import("SymbolInformation","@types/vscode")>] SymbolInformation(name: string, kind: SymbolKind, range: Range, ?uri: Uri, ?containerName: string) =
         member __.name with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.containerName with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.kind with get(): SymbolKind = failwith "JS only" and set(v: SymbolKind): unit = failwith "JS only"
         member __.location with get(): Location = failwith "JS only" and set(v: Location): unit = failwith "JS only"
 
-    and [<Import("DocumentSymbol","vscode")>] DocumentSymbol(name: string, detail: string, kind: SymbolKind, range: Range, selectionRange: Range) =
+    and [<Import("DocumentSymbol","@types/vscode")>] DocumentSymbol(name: string, detail: string, kind: SymbolKind, range: Range, selectionRange: Range) =
         member __.children with get(): ResizeArray<DocumentSymbol> = failwith "JS only" and set(v: ResizeArray<DocumentSymbol>): unit = failwith "JS only"
         member __.name with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.detail with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
@@ -376,14 +376,14 @@ module vscode =
     and ReferenceProvider =
         abstract provideReferences: document: TextDocument * position: Position * context: ReferenceContext * token: CancellationToken -> U2<ResizeArray<Location>, Promise<ResizeArray<Location>>>
 
-    and [<Import("TextEdit","vscode")>] TextEdit(range: Range, newText: string) =
+    and [<Import("TextEdit","@types/vscode")>] TextEdit(range: Range, newText: string) =
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
         member __.newText with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         static member replace(range: Range, newText: string): TextEdit = failwith "JS only"
         static member insert(position: Position, newText: string): TextEdit = failwith "JS only"
         member __.delete(range: Range): TextEdit = failwith "JS only"
 
-    and [<Import("WorkspaceEdit","vscode")>] WorkspaceEdit() =
+    and [<Import("WorkspaceEdit","@types/vscode")>] WorkspaceEdit() =
         member __.size with get(): float = failwith "JS only" and set(v: float): unit = failwith "JS only"
         member __.replace(uri: Uri, range: Range, newText: string): unit = failwith "JS only"
         member __.insert(uri: Uri, position: Position, newText: string): unit = failwith "JS only"
@@ -410,16 +410,16 @@ module vscode =
     and OnTypeFormattingEditProvider =
         abstract provideOnTypeFormattingEdits: document: TextDocument * position: Position * ch: string * options: FormattingOptions * token: CancellationToken -> U2<ResizeArray<TextEdit>, Promise<ResizeArray<TextEdit>>>
 
-    and [<Import("ParameterInformation","vscode")>] ParameterInformation(label: string, ?documentation: U2<string, MarkdownString>) =
+    and [<Import("ParameterInformation","@types/vscode")>] ParameterInformation(label: string, ?documentation: U2<string, MarkdownString>) =
         member __.label with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.documentation with get(): U2<string, MarkdownString> = failwith "JS only" and set(v: U2<string, MarkdownString>): unit = failwith "JS only"
 
-    and [<Import("SignatureInformation","vscode")>] SignatureInformation(label: string, ?documentation: U2<string, MarkdownString>) =
+    and [<Import("SignatureInformation","@types/vscode")>] SignatureInformation(label: string, ?documentation: U2<string, MarkdownString>) =
         member __.label with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.documentation with get(): U2<string, MarkdownString> = failwith "JS only" and set(v: U2<string, MarkdownString>): unit = failwith "JS only"
         member __.parameters with get(): ResizeArray<ParameterInformation> = failwith "JS only" and set(v: ResizeArray<ParameterInformation>): unit = failwith "JS only"
 
-    and [<Import("SignatureHelp","vscode")>] SignatureHelp() =
+    and [<Import("SignatureHelp","@types/vscode")>] SignatureHelp() =
         member __.signatures with get(): ResizeArray<SignatureInformation> = failwith "JS only" and set(v: ResizeArray<SignatureInformation>): unit = failwith "JS only"
         member __.activeSignature with get(): float = failwith "JS only" and set(v: float): unit = failwith "JS only"
         member __.activeParameter with get(): float = failwith "JS only" and set(v: float): unit = failwith "JS only"
@@ -447,7 +447,7 @@ module vscode =
         | File = 16
         | Reference = 17
 
-    and [<Import("CompletionItem","vscode")>] CompletionItem(label: string) =
+    and [<Import("CompletionItem","@types/vscode")>] CompletionItem(label: string) =
         member __.label with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.kind with get(): CompletionItemKind = failwith "JS only" and set(v: CompletionItemKind): unit = failwith "JS only"
         member __.detail with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
@@ -463,7 +463,7 @@ module vscode =
         abstract provideCompletionItems: document: TextDocument * position: Position * token: CancellationToken -> U2<ResizeArray<CompletionItem>, Promise<ResizeArray<CompletionItem>>>
         abstract resolveCompletionItem: item: CompletionItem * token: CancellationToken -> U2<CompletionItem, Promise<CompletionItem>>
 
-    and [<Import("SelectionRange","vscode")>] SelectionRange(range: Range, ?parent: SelectionRange) =
+    and [<Import("SelectionRange","@types/vscode")>] SelectionRange(range: Range, ?parent: SelectionRange) =
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
         member __.parent with get(): SelectionRange option = failwith "JS only" and set(v: SelectionRange option): unit = failwith "JS only"
 
@@ -514,7 +514,7 @@ module vscode =
         abstract has: section: string -> bool
         abstract update: section: string * value: 'T * configurationTarget: bool -> Promise<unit>
 
-    and [<Import("Location","vscode")>] Location(uri: Uri, rangeOrPosition: U2<Range, Position>) =
+    and [<Import("Location","@types/vscode")>] Location(uri: Uri, rangeOrPosition: U2<Range, Position>) =
         member __.uri with get(): Uri = failwith "JS only" and set(v: Uri): unit = failwith "JS only"
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
 
@@ -527,7 +527,7 @@ module vscode =
     and [<RequireQualifiedAccess>] DiagnosticTag =
         | Unnecessary = 1
 
-    and [<Import("Diagnostic","vscode")>] Diagnostic(range: Range, message: string, ?severity: DiagnosticSeverity) =
+    and [<Import("Diagnostic","@types/vscode")>] Diagnostic(range: Range, message: string, ?severity: DiagnosticSeverity) =
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
         member __.message with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         member __.source with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
@@ -615,7 +615,7 @@ module vscode =
     and TextDocumentContentProvider =
         abstract provideTextDocumentContent : uri: Uri -> string
 
-    and [<Import("DocumentLink","vscode")>] DocumentLink(range : Range, target: Uri) =
+    and [<Import("DocumentLink","@types/vscode")>] DocumentLink(range : Range, target: Uri) =
         member __.target with get(): Uri = failwith "JS only" and set(v: Uri): unit = failwith "JS only"
         member __.range with get(): Range = failwith "JS only" and set(v: Range): unit = failwith "JS only"
 
@@ -632,12 +632,12 @@ module vscode =
         abstract light: U3<string, Uri, ThemeIcon> with get, set
         abstract dark: U3<string, Uri, ThemeIcon> with get, set
 
-    and [<Import("ThemeIcon","vscode")>] ThemeIcon =
+    and [<Import("ThemeIcon","@types/vscode")>] ThemeIcon =
         static member File with get(): ThemeIcon = failwith "JS only"
         static member Folder with get(): ThemeIcon = failwith "JS only"
         member __.id with get(): string = jsNative
 
-    and [<Import("TreeItem","vscode")>] TreeItem(label: string, ?collapsibleState: TreeItemCollapsibleState) =
+    and [<Import("TreeItem","@types/vscode")>] TreeItem(label: string, ?collapsibleState: TreeItemCollapsibleState) =
         member __.label with get(): string option = jsNative and set(v: string option) = jsNative
         member __.id with get(): string option = jsNative and set(v: string option) = jsNative
         member __.iconPath with get(): U4<string, Uri, TreeIconPath, ThemeIcon> option = jsNative and set(v: U4<string, Uri, TreeIconPath, ThemeIcon> option) = jsNative
@@ -864,21 +864,22 @@ module vscode =
         /// <param name="state">Persisted state from the webview content.</param>
         abstract deserializeWebviewPanel: webviewPanel: WebviewPanel * state: obj option -> Promise<unit>
 
-    and [<Import("SemanticTokensLegend","vscode")>] SemanticTokensLegend(tokenTypes: string[]) =
+    and [<Import("SemanticTokensLegend","@types/vscode")>] SemanticTokensLegend(tokenTypes: string[], ?tokenModifiers: string[]) =
         member __.tokenTypes with get(): string[] = jsNative
+        member __.tokenModifiers with get(): string[] = jsNative
 
-    and [<Import("SemanticTokensBuilder","vscode")>] SemanticTokensBuilder(legend: SemanticTokensLegend) =
-        member __.push(line: int, char: int, lenght:int, tokenType:int) : unit = jsNative
-        member __.push(range: Range, tokenType: string) : unit = jsNative
+    and [<Import("SemanticTokensBuilder","@types/vscode")>] SemanticTokensBuilder(legend: SemanticTokensLegend) =
+        member __.push(line: int, char: int, lenght: int, tokenType: int, ?tokenModifiers: int) : unit = jsNative
+        member __.push(range: Range, tokenType: string, ?tokenModifiers: string[]) : unit = jsNative
         member __.build() : obj = jsNative
 
     and DocumentSemanticTokensProvider =
         abstract provideDocumentSemanticTokens: document: TextDocument * token: CancellationToken -> Promise<obj>
 
 
-    let [<Import("version","vscode")>] version: string = failwith "JS only"
+    let [<Import("version","@types/vscode")>] version: string = failwith "JS only"
 
-    type [<Import("commands","vscode")>] commands =
+    type [<Import("commands","@types/vscode")>] commands =
         static member registerCommand(command: string, callback: Func<obj, obj>, ?thisArg: obj): Disposable = failwith "JS only"
         static member registerCommand(command: string, callback: Func<obj, obj, obj>, ?thisArg: obj): Disposable = failwith "JS only"
         static member registerCommand(command: string, callback: Func<obj, obj, obj, obj>, ?thisArg: obj): Disposable = failwith "JS only"
@@ -895,7 +896,7 @@ module vscode =
         abstract member cwd : string option with get, set
         abstract member env : obj option with get, set
 
-    type [<Import("ProcessExecution","vscode")>] ProcessExecution(process: string, args: string[], ?options: ProcessExecutionOptions) =
+    type [<Import("ProcessExecution","@types/vscode")>] ProcessExecution(process: string, args: string[], ?options: ProcessExecutionOptions) =
         member __.args with get(): string[] = jsNative
         member __.options with get(): ProcessExecutionOptions option = jsNative
         member __.process with get(): string = jsNative
@@ -903,7 +904,7 @@ module vscode =
     type [<AllowNullLiteral>] TaskDefinition =
         abstract member ``type`` : string option with get, set
 
-    type [<Import("Task","vscode")>] Task(taskDefinition: TaskDefinition, scope: ConfigurationTarget, name: string, source: string, ?execution: ProcessExecution) =
+    type [<Import("Task","@types/vscode")>] Task(taskDefinition: TaskDefinition, scope: ConfigurationTarget, name: string, source: string, ?execution: ProcessExecution) =
         member __.name with get(): string = jsNative
 
     type TaskProvider =
@@ -914,12 +915,12 @@ module vscode =
         abstract member task : Task with get
         abstract member terminate : unit -> unit
 
-    type [<Import("tasks", "vscode")>] tasks =
+    type [<Import("tasks", "@types/vscode")>] tasks =
         static member taskExecutions with get() : ReadonlyArray<TaskExecution> = failwith "JS only"
         static member executeTask(task: Task) : Promise<TaskExecution> = failwith "JS only"
         static member registerTaskProvider(``type``: string, provider: TaskProvider) : Disposable = failwith "JS only"
 
-    type [<Import("debug", "vscode")>] debug =
+    type [<Import("debug", "@types/vscode")>] debug =
         static member activeDebugSession with get() : DebugSession = failwith "JS only"
         static member onDidChangeActiveDebugSession with get() : Event<DebugSession> = failwith "JS only"
         static member onDidReceiveDebugSessionCustomEvent with get() : Event<DebugSessionCustomEvent> = failwith "JS only"
@@ -927,7 +928,7 @@ module vscode =
         static member onDidStartDebugSession with get() : Event<DebugSession> = failwith "JS only"
         static member startDebugging(folder: WorkspaceFolder,  nameOrConfiguration: U2<string, obj>) : Promise<bool>= failwith "JS only"
 
-    type [<Import("window","vscode")>] window =
+    type [<Import("window","@types/vscode")>] window =
         static member activeTextEditor with get(): TextEditor = failwith "JS only" and set(v: TextEditor): unit = failwith "JS only"
         static member visibleTextEditors with get(): ResizeArray<TextEditor> = failwith "JS only" and set(v: ResizeArray<TextEditor>): unit = failwith "JS only"
         static member onDidChangeActiveTextEditor with get(): Event<TextEditor> = failwith "JS only" and set(v: Event<TextEditor>): unit = failwith "JS only"
@@ -968,7 +969,7 @@ module vscode =
         /// Returns `true` if the given section for the given resource (if provided) is affected.
         member __.affectsConfiguration(section: string, ?resource: Uri) : bool = failwith "JS only"
 
-    type [<Import("workspace","vscode")>] workspace =
+    type [<Import("workspace","@types/vscode")>] workspace =
         static member rootPath with get(): string = failwith "JS only" and set(v: string): unit = failwith "JS only"
         static member workspaceFolders with get(): WorkspaceFolder[] = failwith "JS only"
         static member textDocuments with get(): ResizeArray<TextDocument> = failwith "JS only" and set(v: ResizeArray<TextDocument>): unit = failwith "JS only"
@@ -987,7 +988,7 @@ module vscode =
         static member getConfiguration(?section: string, ?resource: Uri): WorkspaceConfiguration = failwith "JS only"
         static member registerTextDocumentContentProvider(selector : DocumentSelector, provider : TextDocumentContentProvider ) : Disposable = failwith "JS only"
 
-    type [<Import("languages","vscode")>] languages =
+    type [<Import("languages","@types/vscode")>] languages =
         static member getLanguages(): Promise<ResizeArray<string>> = failwith "JS only"
         static member ``match``(selector: DocumentSelector, document: TextDocument): float = failwith "JS only"
         static member createDiagnosticCollection(?name: string): DiagnosticCollection = failwith "JS only"
@@ -1009,10 +1010,10 @@ module vscode =
         static member registerSignatureHelpProvider(selector: DocumentSelector, provider: SignatureHelpProvider, [<ParamArray>] triggerCharacters: string[]): Disposable = failwith "JS only"
         static member registerDocumentLinkProvider(selector : DocumentSelector, provider : DocumentLinkProvider) : Disposable = failwith "JS only"
         static member registerSelectionRangeProvider(selector : DocumentSelector, provider : SelectionRangeProvider) : Disposable = failwith "JS only"
-        static member registerDocumentSemanticTokensProvider(selector: DocumentSeletor, provider: DocumentSemanticTokensProvider, legend: SemanticTokensLegend): Disposable = failwith "JS only"
+        static member registerDocumentSemanticTokensProvider(selector: DocumentSelector, provider: DocumentSemanticTokensProvider, legend: SemanticTokensLegend): Disposable = failwith "JS only"
         static member setLanguageConfiguration(language: string, configuration: LanguageConfiguration): Disposable = failwith "JS only"
 
-    type [<Import("extensions","vscode")>] extensions =
+    type [<Import("extensions","@types/vscode")>] extensions =
         static member all with get(): ResizeArray<Extension<obj>> = failwith "JS only" and set(v: ResizeArray<Extension<obj>>): unit = failwith "JS only"
         static member getExtension(extensionId: string): Extension<obj> = failwith "JS only"
         static member getExtension(extensionId: string): Extension<'T> = failwith "JS only"

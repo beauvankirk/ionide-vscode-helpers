@@ -9,3 +9,4 @@ nuget FSharp.Core
 group build
     source https://www.nuget.org/api/v2
     nuget Fake
+    nuget Fake.DotNet.Cli

@@ -1,4 +1,6 @@
-﻿#r "packages/build/FAKE/tools/FakeLib.dll"
+﻿// #r "paket:
+// nuget Fake.DotNet.Cli //"
+#r "packages/build/FAKE/tools/FakeLib.dll"
 
 open Fake
 open Fake.YarnHelper
